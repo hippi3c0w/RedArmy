@@ -1,0 +1,22 @@
+#!/bin/zsh
+ansible [server1] -m shell -a 'df -kh' --forks=1 -u malen > ~/ansible/[server1].txt
+ansible [server2] -m shell -a 'df -kh' --forks=1 -u malen > ~/ansible/[server2].txt
+#server1=`cat ~/ansible/server1.txt | grep "%"`
+cat server1.txt| cut -d " " -f1,2,3 | grep -v Filesystem | grep -v SUCCESS > ~/ansible/server1Partition.txt
+#Check server1 space
+for server1Partition in $(cat ~/ansible/server1Partition.txt)
+do
+        checkserver1Space=`cat server1Space.txt| egrep "(vg0|sda|md|dm)" | expand| tr -s " " | cut -d " " -f5 | tr -d % > ~/ansible/server1Partitions$
+                for i in $(cat ~/ansible/server1Partitions.txt)
+                do
+                        if [ $i -ge "20" ];then
+                        curl -s -X POST https://api.telegram.org/bot[Telegram AuthCode]/sendMessage -d chat_id=[Telegram_id] -d$
+                        #echo "Disk almost full--> $i % used"
+                        mv server1Space.txt server1Alert.txt
+                        cp -p server1Alert.txt > /var/www/html/ansible
+                        exit
+                        fi
+                done
+
+done
+#To obtain Telegram ID-->https://api.telegram.org/bot[Telegram API code]/getUpdates
