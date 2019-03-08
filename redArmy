@@ -9,7 +9,7 @@ do
         checkserver1Space=`cat server1Space.txt| egrep "(vg0|sda|md|dm)" | expand| tr -s " " | cut -d " " -f5 | tr -d % > ~/ansible/server1Partitions$
                 for i in $(cat ~/ansible/server1Partitions.txt)
                 do
-                        if [ $i -ge "20" ];then
+                        if [ $i -ge "80" ];then
                         curl -s -X POST https://api.telegram.org/bot[Telegram AuthCode]/sendMessage -d chat_id=[Telegram_id] -d$
                         #echo "Disk almost full--> $i % used"
                         mv server1Space.txt server1Alert.txt
