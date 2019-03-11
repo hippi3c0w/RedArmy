@@ -10,7 +10,7 @@ do
                 for i in $(cat ~/ansible/server1Partitions.txt)
                 do
                         if [ $i -ge "80" ];then
-                        curl -s -X POST https://api.telegram.org/bot[Telegram AuthCode]/sendMessage -d chat_id=[Telegram_id] -d$
+                        curl -s -X POST https://api.telegram.org/bot[Telegram AuthCode]/sendMessage -d chat_id=[Telegram_id] -d chat_id=402948130 -d text="Disk almost full--> $i % used in Corinne Server"
                         #echo "Disk almost full--> $i % used"
                         mv server1Space.txt server1Alert.txt
                         cp -p server1Alert.txt > /var/www/html/ansible
